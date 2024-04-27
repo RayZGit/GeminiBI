@@ -22,6 +22,7 @@ create table if not exists user
 create table if not exists chart
 (
     id         bigint auto_increment comment 'id' primary key,
+    userId     bigint                             null comment 'user id',
     goal       text                               null comment 'analysis goal',
     chartData  text                               null comment 'table analysis',
     chartType  varchar(128)                       null comment 'chart type',
