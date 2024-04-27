@@ -18,9 +18,10 @@ import {
 import { history, useModel, Helmet } from '@umijs/max';
 import { Alert, message, Tabs } from 'antd';
 import Settings from '../../../../config/defaultSettings';
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { flushSync } from 'react-dom';
 import { createStyles } from 'antd-style';
+import {listChartByPageUsingPost} from "@/services/Gemini-BI/chartController";
 const useStyles = createStyles(({ token }) => {
   return {
     action: {
