@@ -103,6 +103,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     public User getLoginUser(HttpServletRequest request) {
 
         Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        log.info("--ray-- {}", userObj);
         User currentUser = (User) userObj;
         if (currentUser == null || currentUser.getId() == null) {
             throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR);

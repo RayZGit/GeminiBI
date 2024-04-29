@@ -6,6 +6,7 @@ import { request } from '@umijs/max';
 export async function getLoginUserUsingGet(options?: { [key: string]: any }) {
   return request<API.BaseResponseLoginUserVO_>('/api/user/get/login', {
     method: 'GET',
+    withCredentials: true,
     ...(options || {}),
   });
 }
@@ -17,6 +18,7 @@ export async function userLoginUsingPost(
 ) {
   return request<API.BaseResponseLoginUserVO_>('/api/user/login', {
     method: 'POST',
+    withCredentials: true,
     headers: {
       'Content-Type': 'application/json',
     },
