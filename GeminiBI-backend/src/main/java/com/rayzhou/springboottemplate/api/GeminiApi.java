@@ -39,16 +39,16 @@ public class GeminiApi {
     );
 
 
-    public String generate(String goal, String data) {
+    public String generate(String goal, String data, String chartType) {
         LinkedHashMap<String, Object> hashMap = new LinkedHashMap<>();
         List<Map<String, String>> parts = List.of(
                 Map.of("text", "input: You are a data scientist and a software frontend engineer."),
                 Map.of("text", "output: "),
-                Map.of("text", "output: input: I will give you data in following format.\\nAnlysis Goal:\\n{The goal of requirement of this data analysis}\\nRaw Data: \\n{data in csv format and using , to split}"),
+                Map.of("text", "output: input: I will give you data in following format.\\nAnlysis Goal:\\n{The goal of requirement of this data analysis}\\nRaw Data: \\n{data in csv format and using , to split}\\n\\nData Chart Type :\\n{basic chartype Echart V5 supports. ANY means you can generate any charttype }"),
                 Map.of("text", "output: "),
                 Map.of("text", "input: Please use the data I provided to generate output in following format. \n-----\n{data analysis conclusion in one paragraph}\n-----\n{data visualization code in Echart V5 option config javascript code}\n-----\nPlease do not output any other info."),
                 Map.of("text", "output: "),
-                Map.of("text", String.format("input: Anlysis Goal:\n%s\nRaw Data: \n%s", goal, data)),
+                Map.of("text", String.format("input: Anlysis Goal:\n%s\nRaw Data: \n%s\nData Chart Type:\n%s", goal, data, chartType)),
                 Map.of("text", "output: ")
                 );
 

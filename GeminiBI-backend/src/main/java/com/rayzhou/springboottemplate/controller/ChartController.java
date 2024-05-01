@@ -100,6 +100,7 @@ public class ChartController {
     @PostMapping("/generate")
     public BaseResponse<BIResponse> genChart(@RequestPart("file") MultipartFile multipartFile,
                                          GenChartRequest genChartRequest, HttpServletRequest request) {
+        User user = userService.getLoginUser(request);
         String goal = genChartRequest.getGoal();
         String chartType = genChartRequest.getChartType();
         String chartName = genChartRequest.getChartName();
@@ -108,16 +109,28 @@ public class ChartController {
 
         String result = ExcelUtils.excelToCsv(multipartFile);
 
-        String aiResponse = geminiApi.generate(goal, result);
+        String aiResponse = geminiApi.generate(goal, result, chartType);
         String[] splits = aiResponse.split(SPLIT);
 
         ThrowUtils.throwIf(splits.length < 3, ErrorCode.SYSTEM_ERROR, "AI Generation Error");
 
-        BIResponse response = BIResponse.builder()
-                .chartData(splits[2])
-                .analysisData(splits[1])
-                .build();
 
+        Chart chart = new Chart();
+        chart.setUserId(user.getId());
+        chart.setGoal(goal);
+        chart.setChartData(result);
+        chart.setChartType(chartType);
+        chart.setGenChart(splits[2].trim());
+        chart.setGenResult(splits[1].trim());
+
+        boolean saveResult = chartService.save(chart);
+        ThrowUtils.throwIf(!saveResult, ErrorCode.SYSTEM_ERROR, "Fail to save chart");
+
+        BIResponse response = BIResponse.builder()
+                .chartId(chart.getId())
+                .chartData(chart.getGenChart())
+                .analysisData(chart.getGenResult())
+                .build();
 
         return ResultUtils.success(response);
     }

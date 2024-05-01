@@ -9,6 +9,8 @@ import java.io.Serializable;
 @Data
 public class BIResponse implements Serializable {
 
+    private Long chartId;
+
     private String chartData;
 
     private String analysisData;
