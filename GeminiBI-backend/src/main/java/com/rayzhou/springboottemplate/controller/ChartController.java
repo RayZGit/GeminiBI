@@ -2,27 +2,33 @@ package com.rayzhou.springboottemplate.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.rayzhou.springboottemplate.api.GeminiApi;
 import com.rayzhou.springboottemplate.common.BaseResponse;
 import com.rayzhou.springboottemplate.common.DeleteRequest;
 import com.rayzhou.springboottemplate.common.ErrorCode;
 import com.rayzhou.springboottemplate.common.ResultUtils;
 import com.rayzhou.springboottemplate.exception.BusinessException;
 import com.rayzhou.springboottemplate.exception.ThrowUtils;
-import com.rayzhou.springboottemplate.model.dto.chart.ChartAddRequest;
-import com.rayzhou.springboottemplate.model.dto.chart.ChartEditRequest;
-import com.rayzhou.springboottemplate.model.dto.chart.ChartQueryRequest;
-import com.rayzhou.springboottemplate.model.dto.chart.ChartUpdateRequest;
+import com.rayzhou.springboottemplate.model.dto.chart.*;
 import com.rayzhou.springboottemplate.model.entity.Chart;
 import com.rayzhou.springboottemplate.model.entity.User;
+import com.rayzhou.springboottemplate.model.vo.BIResponse;
 import com.rayzhou.springboottemplate.service.ChartService;
 import com.rayzhou.springboottemplate.service.UserService;
+import com.rayzhou.springboottemplate.utils.ExcelUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.List;
+
+import static com.rayzhou.springboottemplate.api.GeminiApi.SPLIT;
 
 @RestController
 @RequestMapping("/chart")
@@ -31,6 +37,9 @@ public class ChartController {
 
     @Resource
     private ChartService chartService;
+
+    @Resource
+    private GeminiApi geminiApi;
 
     @Resource
     private UserService userService;
@@ -86,6 +95,31 @@ public class ChartController {
         ThrowUtils.throwIf(oldChart == null, ErrorCode.NOT_FOUND_ERROR);
         boolean result = chartService.updateById(chart);
         return ResultUtils.success(result);
+    }
+
+    @PostMapping("/generate")
+    public BaseResponse<BIResponse> genChart(@RequestPart("file") MultipartFile multipartFile,
+                                         GenChartRequest genChartRequest, HttpServletRequest request) {
+        String goal = genChartRequest.getGoal();
+        String chartType = genChartRequest.getChartType();
+        String chartName = genChartRequest.getChartName();
+        ThrowUtils.throwIf(StringUtils.isBlank(goal), ErrorCode.PARAMS_ERROR, "Goal is Empty");
+        ThrowUtils.throwIf(StringUtils.isBlank(chartName)||chartName.length() > 100, ErrorCode.PARAMS_ERROR, "Parameter error in chart name");
+
+        String result = ExcelUtils.excelToCsv(multipartFile);
+
+        String aiResponse = geminiApi.generate(goal, result);
+        String[] splits = aiResponse.split(SPLIT);
+
+        ThrowUtils.throwIf(splits.length < 3, ErrorCode.SYSTEM_ERROR, "AI Generation Error");
+
+        BIResponse response = BIResponse.builder()
+                .chartData(splits[2])
+                .analysisData(splits[1])
+                .build();
+
+
+        return ResultUtils.success(response);
     }
 
     @GetMapping("/get")

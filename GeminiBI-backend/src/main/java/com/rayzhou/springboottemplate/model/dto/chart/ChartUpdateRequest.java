@@ -23,5 +23,10 @@ public class ChartUpdateRequest implements Serializable {
      */
     private String chartType;
 
+    /**
+     * chart name
+     */
+    private String chartName;
+
     private static final long serialVersionUID = 1L;
 }

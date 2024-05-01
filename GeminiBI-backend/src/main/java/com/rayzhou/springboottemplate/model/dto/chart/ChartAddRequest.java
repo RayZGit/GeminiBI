@@ -20,6 +20,10 @@ public class ChartAddRequest implements Serializable {
      * chart type
      */
     private String chartType;
+    /**
+     * chart name
+     */
+    private String chartName;
 
 
 }

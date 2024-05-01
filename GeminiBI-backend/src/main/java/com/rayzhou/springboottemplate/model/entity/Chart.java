@@ -28,6 +28,10 @@ public class Chart implements Serializable {
      * analysis goal
      */
     private String goal;
+    /**
+     * chart name
+     */
+    private String chartName;
 
     /**
      * table analysis

@@ -5,12 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class ChartEditRequest implements Serializable {
-
-    /**
-     * id
-     */
-    private Long id;
+public class GenChartRequest implements Serializable {
 
     /**
      * analysis goal
@@ -18,14 +13,10 @@ public class ChartEditRequest implements Serializable {
     private String goal;
 
     /**
-     * table analysis
-     */
-    private String chartData;
-
-    /**
      * chart type
      */
     private String chartType;
+
     /**
      * chart name
      */

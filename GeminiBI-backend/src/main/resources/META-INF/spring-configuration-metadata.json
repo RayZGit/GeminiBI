@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "gemini.client",
+      "type": "com.rayzhou.springboottemplate.api.GeminiApiConfig",
+      "sourceType": "com.rayzhou.springboottemplate.api.GeminiApiConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "gemini.client.apiKey",
+      "type": "java.lang.String",
+      "sourceType": "com.rayzhou.springboottemplate.api.GeminiApiConfig"
+    }
+  ],
+  "hints": []
+}

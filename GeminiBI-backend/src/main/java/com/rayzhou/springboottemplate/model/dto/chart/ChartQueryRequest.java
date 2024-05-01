@@ -25,5 +25,10 @@ public class ChartQueryRequest extends PageRequest implements Serializable {
      */
     private String chartType;
 
+    /**
+     * chart name
+     */
+    private String chartName;
+
     private Long userId;
 }
