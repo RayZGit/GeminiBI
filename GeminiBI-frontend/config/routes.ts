@@ -4,7 +4,8 @@ export default [
     layout: false,
     routes: [{ name: 'Login', path: '/user/login', component: './User/Login' }],
   },
-  { path: '/welcome', name: 'Welcome', icon: 'smile', component: './Welcome' },
+  { path: '/addChart', name: 'Gemini Analysis', icon: 'fund', component: './AddChart' },
+  { path: '/', redirect: '/addChart' },
   {
     path: '/admin',
     name: 'Admin',
@@ -15,7 +16,6 @@ export default [
       { path: '/admin/sub-page', name: 'Sub-Page', component: './Admin' },
     ],
   },
-  { name: 'Search Table', icon: 'table', path: '/list', component: './TableList' },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' },
 ];

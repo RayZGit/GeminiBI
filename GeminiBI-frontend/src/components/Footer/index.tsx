@@ -10,8 +10,8 @@ const Footer: React.FC = () => {
       }}
       links={[
         {
-          key: 'Genimi-BI',
-          title: 'Genimi-BI',
+          key: 'Gemini-BI',
+          title: 'Gemini-BI',
           href: 'https://pro.ant.design',
           blankTarget: true,
         },
@@ -22,8 +22,8 @@ const Footer: React.FC = () => {
           blankTarget: true,
         },
         {
-          key: 'Genimi-BI',
-          title: 'Genimi-BI',
+          key: 'Gemini-BI',
+          title: 'Gemini-BI',
           href: 'https://ant.design',
           blankTarget: true,
         },

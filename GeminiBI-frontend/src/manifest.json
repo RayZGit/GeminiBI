@@ -1,6 +1,6 @@
 {
-  "name": "Genimi-BI",
-  "short_name": "Genimi-BI",
+  "name": "Gemini-BI",
+  "short_name": "Gemini-BI",
   "display": "standalone",
   "start_url": "./?utm_source=homescreen",
   "theme_color": "#002140",

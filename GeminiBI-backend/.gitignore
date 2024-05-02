@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Customize ###
+/src/main/java/com/rayzhou/springboottemplate/api/Constant.java

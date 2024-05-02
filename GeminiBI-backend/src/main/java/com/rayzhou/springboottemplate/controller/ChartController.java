@@ -111,6 +111,10 @@ public class ChartController {
 
         String aiResponse = geminiApi.generate(goal, result, chartType);
         String[] splits = aiResponse.split(SPLIT);
+        for(int i = 0; i < splits.length; i++) {
+            System.out.println("---" + i);
+            System.out.println(splits[i]);
+        }
 
         ThrowUtils.throwIf(splits.length < 3, ErrorCode.SYSTEM_ERROR, "AI Generation Error");
 

@@ -1,4 +1,10 @@
 declare namespace API {
+  type BaseResponseBIResponse_ = {
+    code?: number;
+    data?: BIResponse;
+    message?: string;
+  };
+
   type BaseResponseBoolean_ = {
     code?: number;
     data?: boolean;
@@ -29,8 +35,15 @@ declare namespace API {
     message?: string;
   };
 
+  type BIResponse = {
+    analysisData?: string;
+    chartData?: string;
+    chartId?: number;
+  };
+
   type Chart = {
     chartData?: string;
+    chartName?: string;
     chartType?: string;
     createTime?: string;
     genChart?: string;
@@ -44,18 +57,21 @@ declare namespace API {
 
   type ChartAddRequest = {
     chartData?: string;
+    chartName?: string;
     chartType?: string;
     goal?: string;
   };
 
   type ChartEditRequest = {
     chartData?: string;
+    chartName?: string;
     chartType?: string;
     goal?: string;
     id?: number;
   };
 
   type ChartQueryRequest = {
+    chartName?: string;
     chartType?: string;
     current?: number;
     goal?: string;
@@ -68,12 +84,19 @@ declare namespace API {
 
   type ChartUpdateRequest = {
     chartData?: string;
+    chartName?: string;
     chartType?: string;
     id?: number;
   };
 
   type DeleteRequest = {
     id?: number;
+  };
+
+  type genChartUsingPOSTParams = {
+    chartName?: string;
+    chartType?: string;
+    goal?: string;
   };
 
   type getChartByIdUsingGETParams = {

@@ -73,7 +73,7 @@ export default defineConfig({
    * @name layout 插件
    * @doc https://umijs.org/docs/max/layout-menu
    */
-  title: 'Genimi-BI',
+  title: 'Gemini-BI',
   layout: {
     locale: true,
     ...defaultSettings,
@@ -134,7 +134,7 @@ export default defineConfig({
       schemaPath: 'http://localhost:8101/api/v2/api-docs',
       // schemaPath: join(__dirname, 'oneapi.json'),
       mock: false,
-      projectName: 'Genimi-BI',
+      projectName: 'Gemini-BI',
     },
     {
       requestLibPath: "import { request } from '@umijs/max'",
