@@ -23,15 +23,15 @@ The goal to help me not familiar not familiar with BI to get benefit from Gemini
 4. Frontend Displaying
 
 ##### Future Scope
-- .Data Management
+- Data Management
 -  Async Data Generalization 
 
 
 ![GenimiBI-Future.png](https://raw.githubusercontent.com/RayZGit/GeminiBI/main/resources/GenimiBI-Future.png)
 #### Tech Stack
-**Front-End**:  React, Apache Echarts
-**Back-End**: Java, Springboot,  MySQL,  Gemini
-**Tools** EasyExcel, Mybatis Plus, Swagger, Knef4j
+- **Front-End**:  React, Apache Echarts
+- **Back-End**: Java, Springboot,  MySQL,  Gemini
+- **Tools** EasyExcel, Mybatis Plus, Swagger, Knef4j
 
 
 ### Database
